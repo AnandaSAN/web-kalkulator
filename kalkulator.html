@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalkulator</title>
+    <style>
+        /* Gaya untuk kontainer tombol */
+        .button-angka {
+            text-align: center;
+        }
+
+        .button-symbol {
+            text-align: center;
+        }
+
+        /* Gaya untuk tombol */
+        .button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: rgba(42, 35, 102, 0.626);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: rgba(42, 35, 102, 0.626);
+        }
+
+        /* Gaya untuk input */
+        .input-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Gaya untuk judul */
+        h1 {
+            text-align: center;
+            background-color: rgba(26, 25, 37, 0.626);
+            color: #fff;
+            padding: 10px;
+        }
+
+        /* Gaya untuk tombol angka dan operasi */
+        .numeric-button {
+            background-color: rgba(42, 35, 102, 0.626);
+            color: #fff;
+        }
+
+        .numeric-button:hover {
+            background-color: rgba(8, 0, 85, 0.733);
+        }
+
+    </style>
+    <script>
+        var inputYangDipilih = "angka1"; // Menggunakan input pertama secara default
+
+        function pilihInput(inputId) {
+            inputYangDipilih = inputId;
+        }
+
+        function tampilkanPopup(operasi) {
+            // Mengambil nilai dari kedua input teks
+            var angka1 = parseFloat(document.getElementById("angka1").value);
+            var angka2 = parseFloat(document.getElementById("angka2").value);
+            var hasil;
+
+            // Melakukan perhitungan berdasarkan operasi yang dipilih
+            if (operasi === 'tambah') {
+                hasil = angka1 + angka2;
+            } else if (operasi === 'kurang') {
+                hasil = angka1 - angka2;
+            } else if (operasi === 'kali') {
+                hasil = angka1 * angka2;
+            } else if (operasi === 'bagi') {
+                if (angka2 !== 0) {
+                    hasil = angka1 / angka2;
+                } else {
+                    alert("Tidak dapat melakukan pembagian oleh nol.");
+                    return;
+                }
+            } else if (operasi === 'sin') {
+                hasil = Math.sin(angka1);
+            } else if (operasi === 'cos') {
+                hasil = Math.cos(angka1);
+            } else if (operasi === 'tan') {
+                hasil = Math.tan(angka1);
+            } else if(operasi === 'pangkat'){
+                hasil = angka1 ** angka2;
+            }else {
+                alert("Operasi tidak valid");
+                return;
+            }
+
+            // Menampilkan hasil dalam popup
+            alert("Hasil: " + hasil);
+        }
+
+        function tambahkanAngka(angka) {
+            var angkaInput = document.getElementById(inputYangDipilih);
+            angkaInput.value = angkaInput.value + angka;
+        }
+    </script>
+</head>
+<body>
+    <h1>Kalkulator</h1>
+    
+    <div class="input-container">
+        <input type="text" id="angka1" placeholder="Angka pertama" onclick="pilihInput('angka1')">
+        <input type="text" id="angka2" placeholder="Angka kedua" onclick="pilihInput('angka2')">
+    </div>
+    
+        <div class="button-angka">
+            <button class="button numeric-button" onclick="tambahkanAngka('1')">1</button>
+            <button class="button numeric-button" onclick="tambahkanAngka('2')">2</button>
+            <button class="button numeric-button" onclick="tambahkanAngka('3')">3</button><br>
+            <button class="button numeric-button" onclick="tambahkanAngka('4')">4</button>
+            <button class="button numeric-button" onclick="tambahkanAngka('5')">5</button>
+            <button class="button numeric-button" onclick="tambahkanAngka('6')">6</button><br>
+            <button class="button numeric-button" onclick="tambahkanAngka('7')">7</button>
+            <button class="button numeric-button" onclick="tambahkanAngka('8')">8</button>
+            <button class="button numeric-button" onclick="tambahkanAngka('9')">9</button><br>
+            <button class="button numeric-button" onclick="tambahkanAngka('0')">0</button><br><br><br><br>
+        </div>
+
+        <div class="button-symbol">
+            <button class="button numeric-button" onclick="tampilkanPopup('sin')">sin</button>
+            <button class="button numeric-button" onclick="tampilkanPopup('cos')">cos</button>
+            <button class="button numeric-button" onclick="tampilkanPopup('tan')">tan</button><br>
+            <button class="button numeric-button" onclick="tampilkanPopup('tambah')">+</button>
+            <button class="button numeric-button" onclick="tampilkanPopup('kurang')">-</button>
+            <button class="button numeric-button" onclick="tampilkanPopup('kali')">x</button>
+            <button class="button numeric-button" onclick="tampilkanPopup('bagi')">/</button>
+            <button class="button numeric-button" onclick="tampilkanPopup('pangkat')">^</button>
+        </div>
+</body>
+</html>
